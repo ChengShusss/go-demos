@@ -1,0 +1,1 @@
+Notes: every folder here is a single go project. just open folder instead of go-demos.
