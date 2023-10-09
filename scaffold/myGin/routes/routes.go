@@ -11,5 +11,8 @@ import (
 func Load(r *gin.Engine) {
 
 	r.GET("/", controller.Index)
+	r.GET("/insert", controller.Create)
+
+	r.GET("/get", controller.GetAllInfo)
 
 }

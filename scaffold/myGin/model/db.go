@@ -1,4 +1,4 @@
-package sqlite3
+package model
 
 import (
 	"database/sql"
@@ -7,11 +7,26 @@ import (
 	"gopkg.in/gorp.v1"
 )
 
+// Register models used in Sqlite3
+// Key 		: table name
+// Value 	: Struct of data
+var RegisterModels = map[string]interface{}{
+	"infos": Info{},
+}
+
+// TODO fix dbMap init problem
+
 var (
 	dbPath = "info.db"
 )
 
 var dbMap *gorp.DbMap
+
+func init() {
+	// should not initdb everytime
+	GetDbMap(dbPath)
+	InitDb(dbPath)
+}
 
 func GetDbMap(path string) (*gorp.DbMap, error) {
 	if dbMap != nil {

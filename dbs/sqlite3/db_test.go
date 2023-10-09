@@ -34,13 +34,18 @@ func init() {
 
 func TestInitDb(t *testing.T) {
 
-	dbPath := "../../data/dbs/data.db"
+	dbPath = "../../data/dbs/data.db"
 
-	dbMap, err := InitDb(dbPath)
+	dbMap, err := GetDbMap(dbPath)
 	if err != nil {
 		t.Fatalf("Failed to init db, err: %v\n", err)
 	}
 	defer dbMap.Db.Close()
+
+	err = InitDb(dbPath)
+	if err != nil {
+		t.Fatalf("failed to init db, err: %v\n", err)
+	}
 
 	// delete any existing rows
 	err = dbMap.TruncateTables()
@@ -48,17 +53,18 @@ func TestInitDb(t *testing.T) {
 }
 
 func TestInsertToDb(t *testing.T) {
-	dbPath := "../../data/dbs/data.db"
+	dbPath = "../../data/dbs/data.db"
 
-	dbMap, err := InitDb(dbPath)
+	dbMap, err := GetDbMap("")
 	if err != nil {
 		t.Fatalf("Failed to init db, err: %v\n", err)
 	}
 	defer dbMap.Db.Close()
 
-	// delete any existing rows
-	err = dbMap.TruncateTables()
-	checkErr(err, "TruncateTables failed")
+	err = InitDb(dbPath)
+	if err != nil {
+		t.Fatalf("failed to init db, err: %v\n", err)
+	}
 
 	// create two posts
 	p1 := newPost("Go 1.1 released!", "Lorem ipsum lorem ipsum")
@@ -72,17 +78,18 @@ func TestInsertToDb(t *testing.T) {
 }
 
 func TestSelectFromDb(t *testing.T) {
-	dbPath := "../../data/dbs/data.db"
+	dbPath = "../../data/dbs/data.db"
 
-	dbMap, err := InitDb(dbPath)
+	dbMap, err := GetDbMap("")
 	if err != nil {
 		t.Fatalf("Failed to init db, err: %v\n", err)
 	}
 	defer dbMap.Db.Close()
 
-	// delete any existing rows
-	err = dbMap.TruncateTables()
-	checkErr(err, "TruncateTables failed")
+	err = InitDb(dbPath)
+	if err != nil {
+		t.Fatalf("failed to init db, err: %v\n", err)
+	}
 
 	// create two posts
 	p1 := newPost("Go 1.1 released!", "Lorem ipsum lorem ipsum")
@@ -105,13 +112,18 @@ func TestSelectFromDb(t *testing.T) {
 }
 
 func TestOperationForMetaInfo(t *testing.T) {
-	dbPath := "../../data/dbs/data.db"
+	dbPath = "../../data/dbs/data.db"
 
-	dbMap, err := InitDb(dbPath)
+	dbMap, err := GetDbMap("")
 	if err != nil {
 		t.Fatalf("Failed to init db, err: %v\n", err)
 	}
 	defer dbMap.Db.Close()
+
+	err = InitDb(dbPath)
+	if err != nil {
+		t.Fatalf("failed to init db, err: %v\n", err)
+	}
 
 	// delete any existing rows
 	err = dbMap.TruncateTables()
