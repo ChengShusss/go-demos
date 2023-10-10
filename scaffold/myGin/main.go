@@ -13,6 +13,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
+	// r.StaticFS("/static", http.Dir("./"))
 
 	routes.Load(r)
 

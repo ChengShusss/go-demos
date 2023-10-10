@@ -17,7 +17,7 @@ var RegisterModels = map[string]interface{}{
 // TODO fix dbMap init problem
 
 var (
-	dbPath = "info.db"
+	dbPath = "./build/info.db"
 )
 
 var dbMap *gorp.DbMap
@@ -25,7 +25,7 @@ var dbMap *gorp.DbMap
 func init() {
 	// should not initdb everytime
 	GetDbMap(dbPath)
-	InitDb(dbPath)
+	InitDb()
 }
 
 func GetDbMap(path string) (*gorp.DbMap, error) {
@@ -47,9 +47,9 @@ func GetDbMap(path string) (*gorp.DbMap, error) {
 }
 
 // This should not be called everytime start in production env
-func InitDb(dbPath string) error {
+func InitDb() error {
 
-	dbmap, err := GetDbMap(dbPath)
+	dbmap, err := GetDbMap("")
 	if err != nil {
 		return err
 	}
