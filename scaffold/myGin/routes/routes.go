@@ -40,4 +40,6 @@ func LoadStaticFiles(r *gin.Engine) {
 			r.StaticFile("/"+entry.Name(), path.Join(staticPath, entry.Name()))
 		}
 	}
+
+	r.StaticFile("/", path.Join(staticPath, "index.html"))
 }
