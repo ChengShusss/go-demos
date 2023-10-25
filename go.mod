@@ -6,6 +6,7 @@ require (
 	github.com/go-shiori/go-epub v1.2.0
 	github.com/gomarkdown/markdown v0.0.0-20230922112808-5421fefb8386
 	github.com/mattn/go-sqlite3 v1.14.17
+	github.com/spf13/pflag v1.0.5
 	gopkg.in/gorp.v1 v1.7.2
 	gorm.io/driver/sqlite v1.5.4
 	gorm.io/gorm v1.25.5
@@ -20,5 +21,5 @@ require (
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/vincent-petithory/dataurl v1.0.0 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
-	golang.org/x/net v0.13.0 // indirect
+	golang.org/x/net v0.16.0 // indirect
 )
