@@ -6,11 +6,32 @@ import (
 	"time"
 )
 
+type ProcessBar struct {
+	length int
+}
+
+func NewProcessBar(n int) *ProcessBar {
+	return &ProcessBar{
+		length: n,
+	}
+}
+
+func (bar *ProcessBar) ShowBar(p int) {
+	if p < 0 || p > 100 {
+		return
+	}
+
+	backs := strings.Repeat("\b", bar.length)
+	process := strings.Repeat("=", (bar.length-7)*p/100) + ">"
+	format := fmt.Sprintf("%%s[%%-%ds%%3d%%%%]", bar.length-6)
+	fmt.Printf(format, backs, process, p)
+}
+
 func main() {
-	for i := 0; i < 100; i++ {
-		str := strings.Repeat("\b", 105)
-		process := strings.Repeat("=", i) + ">"
-		fmt.Printf("%s[%-100s%2d%%]", str, process, i)
+	bar := NewProcessBar(20)
+	for i := 0; i < 100; i += 2 {
+		bar.ShowBar(i)
 		time.Sleep(time.Second / 20)
 	}
+	bar.ShowBar(100)
 }
